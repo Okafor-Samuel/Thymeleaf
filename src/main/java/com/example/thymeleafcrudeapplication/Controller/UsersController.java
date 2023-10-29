@@ -48,9 +48,20 @@ public class UsersController {
           return "user_form";
         } catch (UserNotFoundException e) {
             //  e.printStackTrace();
-        }
             ra.addFlashAttribute("message","User updated successfully!");
+        }
             return "redirect:/users";
 
+    }
+    @GetMapping("/users/delete/{id}")
+    public String deleteUser(@PathVariable("id") Long id, RedirectAttributes ra) {
+        try {
+            usersService.delete(id);
+            return "user_form";
+        } catch (UserNotFoundException e) {
+            //  e.printStackTrace();
+            ra.addFlashAttribute("message", "User deleted successfully!");
+        }
+        return "redirect:/users";
     }
 }
